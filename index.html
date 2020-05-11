@@ -2,52 +2,82 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/style.css">
-  <title>Tabela verdade</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./css/style.css">
+	<title>Tabela verdade</title>
 </head>
 
 <body>
-  <div class="result"></div>
+	<header>
+		<h1> Tabela Verdade </h1>
 
-  <div class="container">
-    <select name="select1" id="select1">
-      <option value="Vazio" selected>Vazio</option>
-      <option value="Negação">~</option>
-    </select>
+		<aside>
+			<button class="open-modal-history btn">Histórico</button>
+			<button class="open-modal-info btn">Informação sobre o programa</button>
+		</aside>
 
-    <h2>(</h2>
-    <select name="select2" id="select2">
-      <option value="Vazio" selected>Vazio</option>
-      <option value="Negação">~</option>
-    </select>
+		<section class="form-container">
+			<nav class="nav-unicode">
+				<button class="btn btn-code">&#126;</button>
+				<button class="btn btn-code">&and;</button>
+				<button class="btn btn-code">&or;</button>
+				<button class="btn btn-code">&rarr;</button>
+				<button class="btn btn-code">&harr;</button>
+				<button class="btn btn-code">(</button>
+				<button class="btn btn-code">)</button>
+			</nav>
 
-    <input name="num1" id="num1">
+			<form action="/" method="POST" class="form-exec">
+				<label for="exec">Fórmula</label>
 
-    <br>
+				<textarea name="exec" id="exec" cols="30" rows="10" placeholder="Exemplo: &#126;1 &rarr; (0 &or; 1)"></textarea>
 
-    <select name="tipo" id="tipo">
-      <option value="and" selected>/\</option>
-      <option value="or">\/</option>
-      <option value="if">-></option>
-      <option value="igual">&lt;-&gt;</option>
-    </select>
+				<input type="submit" value="Enviar" class="btn">
+			</form>
+		</section>
+	</header>
 
-    <br>
+	<main class="hide">
+		<div class="result-container"></div>
+		<span class="btn close">&times;</span>
+	</main>
 
-    <select name="select3" id="select3">
-      <option value="Vazio" selected>Vazio</option>
-      <option value="Negação">~</option>
-    </select>
+	<footer>
+		<a href="https://github.com/joaoazevedoJS" class="link" target="_blank">
+			Feito com <span>❤</span> JoaoAzevedoJS
+		</a>
+	</footer>
 
-    <input name="num2" id="num2">
-    <h2>)</h2>
+	<div class="modal modal-history hide">
+		<div class="modal-content">
+			<h2>Histórico</h2>
 
-    <button class="btn-res">Gerar Resultado</button>
-  </div>
+			<section class="history"></section>
 
-  <script src="./js/script.js"></script>
+			<span class="btn close">&times;</span>
+		</div>
+	</div>
+
+	<div class="modal modal-info hide">
+		<div class="modal-content">
+			<h2>Informação sobre o Programa</h2>
+
+			<p>O número <strong>1</strong> significa <strong>verdadeiro</strong></p>
+			<p>O número <strong>0</strong> significa <strong>falso</strong></p>
+			<p>O símbolo de <strong>&#126;</strong> significa <strong>negação</strong></p>
+			<p>O símbolo de <strong>&and;</strong> significa <strong>conjunção (and)</strong></p>
+			<p>O símbolo de <strong>&or;</strong> significa <strong>disjunção (or) </strong></p>
+			<p>O símbolo de <strong>&rarr;</strong> significa <strong>se... então</strong></p>
+			<p>O símbolo de <strong>&harr;</strong> significa <strong>...se somente se...</strong></p>
+
+			<a href="https://github.com/joaoazevedoJS" target="_blank">Feito por João Azevedo</a>
+			<span class="btn close">&times;</span>
+		</div>
+	</div>
+
+	<script src="./js/script.js"></script>
 </body>
 
 </html>
