@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Tabela verdade</title>
+</head>
+
+<body>
+  <div class="result"></div>
+
+  <div class="container">
+    <select name="select1" id="select1">
+      <option value="Vazio" selected>Vazio</option>
+      <option value="Negação">~</option>
+    </select>
+
+    <h2>(</h2>
+    <select name="select2" id="select2">
+      <option value="Vazio" selected>Vazio</option>
+      <option value="Negação">~</option>
+    </select>
+
+    <input name="num1" id="num1">
+
+    <br>
+
+    <select name="tipo" id="tipo">
+      <option value="and" selected>/\</option>
+      <option value="or">\/</option>
+      <option value="if">-></option>
+      <option value="igual">&lt;-&gt;</option>
+    </select>
+
+    <br>
+
+    <select name="select3" id="select3">
+      <option value="Vazio" selected>Vazio</option>
+      <option value="Negação">~</option>
+    </select>
+
+    <input name="num2" id="num2">
+    <h2>)</h2>
+
+    <button class="btn-res">Gerar Resultado</button>
+  </div>
+
+  <script src="./js/script.js"></script>
+</body>
+
+</html>

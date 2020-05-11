@@ -1,0 +1,13 @@
+.container {
+  margin-left: 200px;
+  padding: 20px;
+}
+
+.result {
+  text-align: center;
+  padding: 15px;
+}
+
+input, select {
+  margin: 10px 0;
+}
