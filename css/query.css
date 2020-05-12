@@ -1,0 +1,18 @@
+@media (max-width: 880px) {
+	header aside {
+		position: static;
+		margin-top: 45px;
+	}
+
+	header section.form-container {
+		margin: 20px;
+	}
+
+	header section.form-container form.form-exec input.btn {
+		height: 50px;
+	}
+
+	div.modal-content {
+		width: 95%;
+	}
+}

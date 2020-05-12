@@ -1,28 +1,6 @@
-// Submit do form
+// Submit do form de formula
 document.querySelector('form.form-exec')
-	.addEventListener("submit", result)
-
-// Fechar container de resultado
-document.querySelector('main span.btn.close')
-	.addEventListener("click", () =>
-		document.querySelector('main')
-			.classList.toggle('hide')
-	)
-
-// Abir e fechar modal
-for (let modal of document.querySelectorAll('.modal')) {
-	// Modal.classList[1] está pegando a classe unica de cada modal!
-	const openModal = `button.open-${modal.classList[1]}`
-	const closeModal = `div.${modal.classList[1]} span.close`
-
-	// Abir modal
-	document.querySelector(openModal)
-		.addEventListener("click", () => modal.classList.toggle('hide'))
-
-	// fechar modal
-	document.querySelector(closeModal)
-		.addEventListener('click', () => modal.classList.toggle('hide'))
-}
+	.addEventListener("submit", newFormula)
 
 // Adicionar símbolo no textarea
 for (let btn of document.querySelectorAll('.btn-code')) {
@@ -36,7 +14,7 @@ for (let btn of document.querySelectorAll('.btn-code')) {
 	})
 }
 
-function result(e) {
+function newFormula(e) {
 	e.preventDefault()
 
 	let textarea = document.getElementById('exec').value
@@ -45,24 +23,86 @@ function result(e) {
 	textarea = textarea.replace(/\s{2,}/g, " ")
 
 	// caso o numero não seja 0 ou 1 e o textarea estiver vazio, vai gerar um aviso
-	if (textarea.match(/[2-9]/gi)) {
-		return alert('Somente o número 0 ou 1')
-	} else if (textarea == '') {
-		return alert("Digite antes de começar")
+	if (textarea == '') {
+		return alert("Digite antes de começar (Não esqueça de adicionar uma linha na aba ao lado)")
 	}
 
-	// Copiar o conteudo para gerar a formula
+	const rows = document.querySelectorAll('div.row-column')
+
+	// vai receber um array com todos os resultados
+	const formulas = loopInRows(rows, textarea)
+
+	const container = document.querySelector('section.allResult')
+	container.innerHTML = ''
+
+	for (let i in formulas) {
+		// adicionar o resultado
+		printResult(result(formulas[i]), i)
+	}
+
+	// Adicionar no historico
+	newHistory(textarea)
+
+	// Mostrar modal de resultado
+	document.querySelector('div.modal-result').classList.remove('hide')
+}
+
+// vai fazer um loop em cada linha
+function loopInRows(rows, textarea) {
+	const formulas = []
+	let index = 0;
+
+	for (let row of rows) {
+		let formula = textarea;
+
+		const rowP = document.querySelectorAll('input.rowP')[index].value
+		const rowQ = document.querySelectorAll('input.rowQ')[index].value
+		const rowR = document.querySelectorAll('input.rowR')[index].value
+
+		formula = transformInNumber(rowP, 'P', formula)
+		formula = transformInNumber(rowQ, 'Q', formula)
+		formula = transformInNumber(rowR, 'R', formula)
+
+		// se o resultado for igual o inicial, ele não vai adicionar no array! (para evitar bug)
+		if (formula != textarea) {
+			formulas.push(formula)
+		}
+
+		index++
+	}
+
+	return formulas
+}
+
+function transformInNumber(value, word, textarea) {
+	// procurar todas as letras que vier como param
+	const regex = new RegExp(`\\b${word}\\b`, 'gi')
+
+	// Tirar todos os espaços, isso vai evitar bugs
+	value = value.replace(/\s{0,}/g, '')
+
+	// se não tiver um resultado ele vai enviar um resposta igual, não adicionando no array
 	let formula = textarea
 
+	if (value == 'V' || value == "v") {
+		formula = textarea.replace(regex, '1')
+	} else if (value == 'F' || value == "f") {
+		formula = textarea.replace(regex, '0')
+	}
+
+	return formula
+}
+
+function result(formula) {
 	// Negação
-	const denial = textarea.match(/~[0-1]/gi)
+	const denial = formula.match(/~(0|1)/gi)
 
 	if (denial) {
 		denial.forEach(not => {
 			const bool = Number(not.match(/0|1/)[0])
 
 			// vai negar todos os numeros 0 e 1 com o simbolo de ~, transformando em boolean
-			formula = formula.replace(/~[0-1]/, !bool)
+			formula = formula.replace(/~(0|1)/, !bool)
 		})
 	}
 
@@ -83,7 +123,6 @@ function result(e) {
 	if (parentheses) {
 		parentheses.forEach(paren => {
 			const bool = paren.match(/true|false/g)
-
 			// quem estiver em parêntese vai ter executar primeiro
 			let res = select(bool[0], bool[1], paren)
 
@@ -112,28 +151,28 @@ function result(e) {
 		operation = formula.match(/(true|false).+?(true|false)/gi)
 	}
 
-	return printResult(formula, textarea)
+	return formula
 }
 
-function printResult(formula, textarea) {
-	// Mostrar resultado
-	document.querySelector('main').classList.remove('hide')
+function printResult(result, line) {
+	line = Number(line) + 1
 
-	// Adicionar no historico
-	newHistory(textarea)
+	const container = document.querySelector('section.allResult')
 
-	const div = document.querySelector('div.result-container')
-	div.innerHTML = ''
+	const row = document.createElement('div')
+	row.classList = 'row-result'
 
-	const h2 = document.createElement('h2')
-	h2.innerText = `Resultado de '${textarea}':`
+	const p1 = document.createElement('p')
+	p1.innerText = `Linha ${line}:`
 
-	const p = document.createElement('p')
-	p.innerText = formula
-	p.classList = 'result'
+	const p2 = document.createElement('p')
+	p2.innerText = result
+	p2.classList = 'result'
 
-	div.appendChild(h2)
-	div.appendChild(p)
+	row.appendChild(p1)
+	row.appendChild(p2)
+
+	container.appendChild(row)
 }
 
 function newHistory(textarea) {
@@ -143,7 +182,7 @@ function newHistory(textarea) {
 
 	const button = document.createElement('button')
 	button.classList = 'backHistory btn'
-	button.innerHTML = `Feito as ${date.getHours()}:${date.getMinutes()}`
+	button.innerHTML = `Feito as ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
 
 	button.onclick = () => {
 		let formula = document.getElementById('exec')
@@ -189,7 +228,7 @@ function select(value1, value2, regex) {
 
 		return andLogic(value1, value2)
 
-	} else if (regex.match('∨')) {
+	} else if (regex.match('∨') || regex.match('ⴸ')) {
 
 		return notLogic(value1, value2)
 

@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/modal.css">
+	<link rel="stylesheet" href="./css/query.css">
 	<title>Tabela verdade</title>
 </head>
 
@@ -14,8 +16,10 @@
 		<h1> Tabela Verdade </h1>
 
 		<aside>
+			<button class="open-modal-rows-columns btn">Linhas</button>
 			<button class="open-modal-history btn">Histórico</button>
 			<button class="open-modal-info btn">Informação sobre o programa</button>
+			<button class="open-modal-result btn">Abrir tabela de resultado!</button>
 		</aside>
 
 		<section class="form-container">
@@ -32,23 +36,41 @@
 			<form action="/" method="POST" class="form-exec">
 				<label for="exec">Fórmula</label>
 
-				<textarea name="exec" id="exec" cols="30" rows="10" placeholder="Exemplo: &#126;1 &rarr; (0 &or; 1)"></textarea>
+				<textarea name="exec" id="exec" cols="30" rows="10" placeholder="Exemplo: &#126;P &rarr; (Q &or; R)"></textarea>
 
-				<input type="submit" value="Enviar" class="btn">
+				<input type="submit" value="Gerar Resultado" class="btn">
 			</form>
 		</section>
 	</header>
-
-	<main class="hide">
-		<div class="result-container"></div>
-		<span class="btn close">&times;</span>
-	</main>
 
 	<footer>
 		<a href="https://github.com/joaoazevedoJS" class="link" target="_blank">
 			Feito com <span>❤</span> JoaoAzevedoJS
 		</a>
 	</footer>
+
+	<div class="modal modal-rows-columns hide">
+		<div class="modal-content">
+			<h2>Linhas da tabela verdade!</h2>
+
+			<form action="/" method="post" class="form-rows">
+				<input type="number" name="newRow" id="newRow" max="10" placeholder="máximo de 10 linhas">
+
+				<input type="submit" value="Nova Linha" class="btn">
+			</form>
+
+			<nav class="title row-column">
+				<h3>Linhas</h3>
+				<h3>P</h3>
+				<h3>Q</h3>
+				<h3>R</h3>
+			</nav>
+
+			<section class="rows-container"></section>
+
+			<span class="btn close">&times;</span>
+		</div>
+	</div>
 
 	<div class="modal modal-history hide">
 		<div class="modal-content">
@@ -64,20 +86,31 @@
 		<div class="modal-content">
 			<h2>Informação sobre o Programa</h2>
 
-			<p>O número <strong>1</strong> significa <strong>verdadeiro</strong></p>
-			<p>O número <strong>0</strong> significa <strong>falso</strong></p>
+			<p>Adicione uma linha com os valores de <strong>P</strong>, <strong>Q</strong> ou <strong>R</strong></p>
 			<p>O símbolo de <strong>&#126;</strong> significa <strong>negação</strong></p>
 			<p>O símbolo de <strong>&and;</strong> significa <strong>conjunção (and)</strong></p>
 			<p>O símbolo de <strong>&or;</strong> significa <strong>disjunção (or) </strong></p>
 			<p>O símbolo de <strong>&rarr;</strong> significa <strong>se... então</strong></p>
 			<p>O símbolo de <strong>&harr;</strong> significa <strong>...se somente se...</strong></p>
 
-			<a href="https://github.com/joaoazevedoJS" target="_blank">Feito por João Azevedo</a>
+			<a href="https://github.com/joaoazevedoJS" target="_blank" class="link">Feito por João Azevedo</a>
+			<span class="btn close">&times;</span>
+		</div>
+	</div>
+
+	<div class="modal modal-result hide">
+		<div class="modal-content">
+			<h2>Resultados: </h2>
+
+			<section class="allResult"></section>
+
 			<span class="btn close">&times;</span>
 		</div>
 	</div>
 
 	<script src="./js/script.js"></script>
+	<script src="./js/modal.js"></script>
+	<script src="./js/row.js"></script>
 </body>
 
 </html>
