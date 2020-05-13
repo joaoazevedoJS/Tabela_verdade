@@ -36,7 +36,14 @@
 			<form action="/" method="POST" class="form-exec">
 				<label for="exec">Fórmula</label>
 
-				<textarea name="exec" id="exec" cols="30" rows="10" placeholder="Exemplo: &#126;P &rarr; (Q &or; R)"></textarea>
+				<textarea
+					name="exec"
+					id="exec"
+					cols="30"
+					rows="10"
+					placeholder="Exemplo: &#126;P &rarr; (Q &or; R)"
+					spellcheck="false"
+					></textarea>
 
 				<input type="submit" value="Gerar Resultado" class="btn">
 			</form>
@@ -58,13 +65,6 @@
 
 				<input type="submit" value="Nova Linha" class="btn">
 			</form>
-
-			<nav class="title row-column">
-				<h3>Linhas</h3>
-				<h3>P</h3>
-				<h3>Q</h3>
-				<h3>R</h3>
-			</nav>
 
 			<section class="rows-container"></section>
 

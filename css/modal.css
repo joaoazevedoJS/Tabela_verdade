@@ -54,15 +54,18 @@ div.modal.modal-rows-columns div.modal-content form.form-rows input#newRow {
 	text-align: center;
 }
 
+div.modal.modal-rows-columns div.modal-content form.form-rows input#newRow,
+div.modal.modal-rows-columns div.modal-content .row-column input {
+	border: 1px solid #aaa;
+	margin: 0 5px;
+}
+
 div.modal.modal-rows-columns div.modal-content .row-column {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
+	gap: 5px;
 	align-items: center;
 	justify-items: center;
-	padding: 0 20px;
-}
-
-div.modal.modal-rows-columns div.modal-content nav.row-column h3 {
 	padding: 0 20px;
 }
 
@@ -72,8 +75,11 @@ div.modal.modal-rows-columns div.modal-content .row-column p {
 }
 
 div.modal.modal-rows-columns div.modal-content .row-column input {
-	width: 100px;
+	width: 100%;
+	padding: 10px 5px;
 	text-align: center;
+	border-radius: 4px;
+	text-transform: uppercase;
 }
 
 /* Modal history */

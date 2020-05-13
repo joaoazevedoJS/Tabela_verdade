@@ -1,4 +1,6 @@
 @media (max-width: 880px) {
+
+
 	header aside {
 		position: static;
 		margin-top: 45px;
@@ -8,11 +10,27 @@
 		margin: 20px;
 	}
 
-	header section.form-container form.form-exec input.btn {
-		height: 50px;
-	}
-
 	div.modal-content {
 		width: 95%;
+	}
+}
+
+@media (max-width: 600px) {
+	.btn {
+		height: 40px;
+	}
+
+	div.modal.modal-rows-columns div.modal-content form.form-rows input#newRow {
+		padding: 10px;
+	}
+
+	div.modal-content h2 {
+		font-size: 100%;
+	}
+
+	div.modal.modal-rows-columns div.modal-content .row-column {
+		grid-template-columns: repeat(2, 1fr);
+		padding: 30px 20px;
+		border-bottom: 1px solid #ddd;
 	}
 }

@@ -29,15 +29,15 @@ function createRow(line) {
 
 	const rowP = document.createElement('input')
 	rowP.classList = 'rowP'
-	rowP.placeholder = "Digite V ou F"
+	rowP.placeholder = "Valor de P"
 
 	const rowQ = document.createElement('input')
 	rowQ.classList = 'rowQ'
-	rowQ.placeholder = "Digite V ou F"
+	rowQ.placeholder = "Valor de Q"
 
 	const rowR = document.createElement('input')
 	rowR.classList = 'rowR'
-	rowR.placeholder = "Digite V ou F"
+	rowR.placeholder = "Valor de R"
 
 	row.appendChild(id)
 	row.appendChild(rowP)
